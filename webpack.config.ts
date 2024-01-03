@@ -1,7 +1,11 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+import path from 'path';
+
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+import type { Configuration } from "webpack";
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 
 const postcssConfig = {
   loader: 'postcss-loader',
@@ -16,7 +20,18 @@ const postcssConfig = {
     sourceMap: true,
   },
 }
-module.exports = (env) => {
+
+const devServer: DevServerConfiguration = {
+  hot: false,
+  static: {
+    directory: path.join(__dirname, 'public'),
+  },
+  historyApiFallback: true,
+  compress: true,
+  port: 3000,
+  allowedHosts: ['localhost', '127.0.0.1'],
+};
+const config = (env: { [key: string]: any }): Configuration => {
   const isProduction = env.production
 
   return {
@@ -35,16 +50,7 @@ module.exports = (env) => {
         filename: 'index.html',
       }),
     ],
-    devServer: {
-      hot: false,
-      static: {
-        directory: path.join(__dirname, 'public'),
-      },
-      historyApiFallback: true,
-      compress: true,
-      port: 3000,
-      allowedHosts: ['localhost', '127.0.0.1'],
-    },
+    devServer,
     module: {
       rules: [
         {
@@ -78,3 +84,4 @@ module.exports = (env) => {
     devtool: isProduction ? false : 'inline-source-map',
   }
 }
+export default config

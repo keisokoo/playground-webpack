@@ -21,5 +21,5 @@
     "jsxImportSource": "react" // JSX 코드를 React 요소로 변환할 때 사용할 모듈
   },
   "include": ["src/**/*", "global.d.ts"], // 컴파일할 파일들의 위치
-  "exclude": ["node_modules", "dist"] // 컴파일에서 제외할 파일들의 위치
+  "exclude": ["node_modules", "dist", "webpack.config.ts"] // 컴파일에서 제외할 파일들의 위치
 }
