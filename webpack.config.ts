@@ -31,7 +31,7 @@ const devServer: DevServerConfiguration = {
   port: 3000,
   allowedHosts: ['localhost', '127.0.0.1'],
 };
-const config = (env: { [key: string]: any }): Configuration => {
+const config = (env: { [key: string]: unknown }): Configuration => {
   const isProduction = env.production
 
   return {
