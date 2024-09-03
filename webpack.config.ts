@@ -4,8 +4,8 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import type { Configuration } from "webpack";
-import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+import type { Configuration } from 'webpack';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 const postcssConfig = {
   loader: 'postcss-loader',
@@ -19,10 +19,10 @@ const postcssConfig = {
     },
     sourceMap: true,
   },
-}
+};
 
 const devServer: DevServerConfiguration = {
-  hot: false,
+  hot: true,
   static: {
     directory: path.join(__dirname, 'public'),
   },
@@ -32,7 +32,7 @@ const devServer: DevServerConfiguration = {
   allowedHosts: ['localhost', '127.0.0.1'],
 };
 const config = (env: { [key: string]: unknown }): Configuration => {
-  const isProduction = env.production
+  const isProduction = env.production;
 
   return {
     mode: isProduction ? 'production' : 'development',
@@ -82,6 +82,6 @@ const config = (env: { [key: string]: unknown }): Configuration => {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss'],
     },
     devtool: isProduction ? false : 'inline-source-map',
-  }
-}
-export default config
+  };
+};
+export default config;
